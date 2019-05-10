@@ -24,20 +24,4 @@ public class DataManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public static void SaveJSONData()
-    {
-
-    }
-}
-
-    public static void LoadJSONData()
-    {
-        string loadPath = "./Assets/Resources/JsonData/Data.json";
-        using (StreamReader reader = new StreamReader(loadPath))
-        {
-            string json = reader.ReadToEnd();
-
-            //data = JsonHelper.getJsonArray<HumanUnit>(json);
-        }
-    }
 }
