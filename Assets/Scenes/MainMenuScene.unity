@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85189058916626741be4148b3f7f3e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameplaySceneIndex: 0
+  gameplaySceneIndex: 1
   creditsPanel: {fileID: 174306565}
   mainMenuPanel: {fileID: 830147558}
 --- !u!4 &1737212721

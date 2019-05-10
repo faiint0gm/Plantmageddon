@@ -1,0 +1,18 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class GameplayMenuController : MonoBehaviour
+{
+    [SerializeField]
+    private int mainMenuSceneIndex;
+
+    public void BackToMenu()
+    {
+        if(SceneManager.GetSceneByBuildIndex(mainMenuSceneIndex) != null)
+        {
+            SceneManager.LoadSceneAsync(mainMenuSceneIndex);
+        }
+    }
+}
