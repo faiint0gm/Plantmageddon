@@ -4521,7 +4521,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.471
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -9210,5 +9210,20 @@ PrefabInstance:
       propertyPath: unitsParent
       value: 
       objectReference: {fileID: 1421398131}
+    - target: {fileID: 8140920129053521488, guid: 32e35a0ba4a737b438628d4cc838060b,
+        type: 3}
+      propertyPath: playerUnitsProgress
+      value: 
+      objectReference: {fileID: 1000108803}
+    - target: {fileID: 8140920129053521488, guid: 32e35a0ba4a737b438628d4cc838060b,
+        type: 3}
+      propertyPath: playerAmountText
+      value: 
+      objectReference: {fileID: 618413443}
+    - target: {fileID: 8140920129053521488, guid: 32e35a0ba4a737b438628d4cc838060b,
+        type: 3}
+      propertyPath: enemyAmountText
+      value: 
+      objectReference: {fileID: 1552371087}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32e35a0ba4a737b438628d4cc838060b, type: 3}
