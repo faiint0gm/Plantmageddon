@@ -18,6 +18,11 @@ public class Unit : MonoBehaviour
     [SerializeField]
     protected UnitType unitType;
 
+    [SerializeField]
+    protected Animator animator;
+    [SerializeField]
+    protected HPBar hpBar;
+
     protected UnitState unitState;
     protected int currentHp;
     protected int killingHp;
@@ -54,10 +59,17 @@ public class Unit : MonoBehaviour
     public void TakeDamage(int dmg, bool isKilling = false)
     {
         unitState = UnitState.BEING_ATTACKED;
-        currentHp -= dmg;
+        if (!isKilling)
+        {
+            currentHp -= dmg;
+            if (hpBar != null)
+                hpBar.SetFiller(currentHp, hp);
+        }
         if(isKilling)
         {
             killingHp -= dmg;
+            if (hpBar != null)
+                hpBar.SetFiller(killingHp, hp);
         }
         if(currentHp <= 0)
         {
@@ -112,11 +124,12 @@ public class Unit : MonoBehaviour
 
     public void BlowOver()
     {
+        unitState = UnitState.KILLING;
         foreach(EnemyUnit e in GameManager.Instance.enemyUnits)
         {
             if(Vector3.Distance(transform.position,e.transform.position)<rangeToAttack)
             {
-                StartCoroutine(TakeOver(e));
+                StartCoroutine(Kill(e));
             }
         }
     }
@@ -272,6 +285,66 @@ public class Unit : MonoBehaviour
         if (takingOverStarted)
         {
             InterruptPathFollowing();
+        }
+    }
+
+    protected virtual void HandleAnimations()
+    {
+        switch (unitState)
+        {
+            case UnitState.IDLE:
+                {
+                    if (targetUnit == null || Vector3.Distance(transform.position, target) <= rangeToAttack)
+                    {
+                        animator.SetBool("Idle", true);
+                        animator.SetBool("isAttacking", false);
+                        animator.SetBool("isBeingAttacked", false);
+                        animator.SetBool("isWalking", false);
+                    }
+                    if (targetUnit != null || Vector3.Distance(transform.position,target)>rangeToAttack)
+                    {
+                        animator.SetBool("Idle", false);
+                        animator.SetBool("isAttacking", false);
+                        animator.SetBool("isBeingAttacked", false);
+                        animator.SetBool("isWalking", true);
+                    }
+                    break;
+                }
+            case UnitState.TAKING_OVER:
+                {
+                    if (Vector3.Distance(transform.position, targetUnit.transform.position) < rangeToAttack)
+                    {
+                        animator.SetBool("Idle", false);
+                        animator.SetBool("isAttacking", true);
+                        animator.SetBool("isBeingAttacked", false);
+                        animator.SetBool("isWalking", false);
+                    }
+                    else
+                    {
+                        animator.SetBool("Idle", false);
+                        animator.SetBool("isAttacking", false);
+                        animator.SetBool("isBeingAttacked", false);
+                        animator.SetBool("isWalking", true);
+                    }
+                    break;
+                }
+            case UnitState.BEING_ATTACKED:
+                {
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("isAttacking", false);
+                    animator.SetBool("isBeingAttacked", true);
+                    animator.SetBool("isWalking", false);
+                    break;
+                }
+            case UnitState.KILLING:
+                {
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("isAttacking", false);
+                    animator.SetBool("isBeingAttacked", false);
+                    animator.SetBool("isWalking", false);
+                    animator.SetBool("isKilling", true);
+                    break;
+                }
         }
     }
 }

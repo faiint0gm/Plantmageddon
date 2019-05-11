@@ -45,6 +45,7 @@ public class PlayerUnit : Unit,IPointerClickHandler
 
     void Update()
     {
+        HandleAnimations();
 
         if (targetUnit != null)
         {
@@ -83,5 +84,12 @@ public class PlayerUnit : Unit,IPointerClickHandler
         }
         GameManager.Instance.playerUnits.Remove(this);
         base.Die();
+    }
+
+    protected override void HandleAnimations()
+    {
+        base.HandleAnimations();
+       
+
     }
 }

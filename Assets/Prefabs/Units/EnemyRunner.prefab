@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6840971786588044547}
   - component: {fileID: 2908803183849540832}
   - component: {fileID: 7102019550568403874}
+  - component: {fileID: 5708595033265342219}
   m_Layer: 0
   m_Name: EnemyRunner
   m_TagString: Untagged
@@ -207,5 +208,25 @@ MonoBehaviour:
   rangeToAttack: 0
   moveSpeed: 30
   unitType: 6
+  animator: {fileID: 5708595033265342219}
   isChangingForm: 0
   safeDistance: 15
+--- !u!95 &5708595033265342219
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197016130511037129}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0c4b3442b01c7454aa61e1baa99ee007, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

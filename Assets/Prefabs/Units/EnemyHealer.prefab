@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7036339741811568246}
   - component: {fileID: 4589629417218766987}
   - component: {fileID: 701217516265021698}
+  - component: {fileID: 8152764193173240926}
   m_Layer: 0
   m_Name: EnemyHealer
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3042407064886869334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.31, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54,6 +55,7 @@ MonoBehaviour:
   rangeToAttack: 15
   moveSpeed: 30
   unitType: 4
+  animator: {fileID: 8152764193173240926}
   isChangingForm: 0
   safeDistance: 30
 --- !u!212 &3132428933421925744
@@ -209,3 +211,22 @@ MonoBehaviour:
   version: 1
   target: {fileID: 0}
   playerTarget: {x: 0, y: 0, z: 0}
+--- !u!95 &8152764193173240926
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042407064886869334}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 46dd1e9a5a7e5594184f2bf6bc7fd1c0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
