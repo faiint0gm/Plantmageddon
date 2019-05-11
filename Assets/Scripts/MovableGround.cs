@@ -9,7 +9,7 @@ public class MovableGround : MonoBehaviour, IPointerClickHandler
     {     
         foreach (PlayerUnit player in GameManager.Instance.selectedUnits)
         {
-            if (player != null)
+            if (player != null && !GameManager.Instance.lockMovement)
             {
                 player.MoveToSelectedTarget();
             }

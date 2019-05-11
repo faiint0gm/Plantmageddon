@@ -19,7 +19,7 @@ public class EnemyUnit : Unit,IPointerClickHandler
     {
         GameManager.Instance.allUnits.Add(this);
         GameManager.Instance.enemyUnits.Add(this);
-
+        Debug.Log("EnemyUnit Awake: " + gameObject.name);
         destinationSetter = GetComponent<AIDestinationSetter>();
         aiPath = GetComponent<AIPath>();
         if (destinationSetter != null)
@@ -58,24 +58,28 @@ public class EnemyUnit : Unit,IPointerClickHandler
         {
             foreach (PlayerUnit player in GameManager.Instance.playerUnits)
             {
-               if (Vector3.Distance(player.transform.position, transform.position) < smallestDistance)
-               {
-                   smallestDistance = Vector3.Distance(player.transform.position, transform.position);
-                   closestPlayer = player;
-                    if (smallestDistance < safeDistance)
+                if (player != null)
+                {
+                    if (Vector3.Distance(player.transform.position, transform.position) < smallestDistance)
                     {
-                        if (unitType == UnitType.enemyAttacker)
+                        smallestDistance = Vector3.Distance(player.transform.position, transform.position);
+                        closestPlayer = player;
+                        if (smallestDistance < safeDistance)
                         {
-                            targetUnit = player;
-                            unitState = UnitState.KILLING;
-                        }
-                        if (unitType == UnitType.enemyHealer)
-                        {
-                            targetUnit = player;
-                            unitState = UnitState.TAKING_OVER;
+                            if (unitType == UnitType.enemyAttacker)
+                            {
+                                targetUnit = player;
+                                unitState = UnitState.KILLING;
+                            }
+                            if (unitType == UnitType.enemyHealer)
+                            {
+                                targetUnit = player;
+                                unitState = UnitState.TAKING_OVER;
+                            }
                         }
                     }
-               }
+
+                }
             }
 
             if(unitType==UnitType.enemyRunner)

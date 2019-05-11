@@ -28,6 +28,7 @@ public class Unit : MonoBehaviour
     protected AIPath aiPath;
     protected float endReachedDistance;
 
+    public bool isChangingForm;
     bool takingOverStarted;
     bool killingStarted;
 
@@ -78,6 +79,7 @@ public class Unit : MonoBehaviour
 
     public void ChangeForm(UnitType attackerType)
     {
+        isChangingForm = true;
         InterruptPathFollowing();
         int randomNumber = 0;
         if (attackerType.ToString().Contains("enemy"))
@@ -88,8 +90,10 @@ public class Unit : MonoBehaviour
         {
             randomNumber = (int)attackerType;
         }
-        GameObject go = Instantiate(GameManager.Instance.unitsPrefabs[(UnitType)randomNumber], transform.position,
+        Debug.Log("Change form! Called from: " + attackerType.ToString());
+        Instantiate(GameManager.Instance.unitsPrefabs[(UnitType)randomNumber], transform.position,
                         Quaternion.identity, GameManager.Instance.unitsParent);
+        /*
         if(randomNumber < 4)
         {
             GameManager.Instance.playerUnits.Add(go.GetComponent<PlayerUnit>());
@@ -98,12 +102,13 @@ public class Unit : MonoBehaviour
         {
             GameManager.Instance.enemyUnits.Add(go.GetComponent<EnemyUnit>());
         }
+        */
         Die();
     }
 
     public virtual void Die()
     {
-        GameManager.Instance.allUnits.Remove(this);
+        GameManager.Instance.allUnits.Remove(this); 
         Destroy(gameObject);
     }
 
@@ -123,7 +128,7 @@ public class Unit : MonoBehaviour
         if(unit.currentHp <=0)
         {
             unitState = UnitState.IDLE;
-            if (unit != null)
+            if (unit != null && !unit.isChangingForm)
             {
                 unit.ChangeForm(unitType);
             }

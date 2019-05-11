@@ -31,11 +31,14 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        CheckFollowingMouse();
-        if (GameManager.Instance.selectedUnits.Count > 0 && !followingMouse && followUnit)
-            FollowUnit();
-        else if (followingMouse && !followUnit)
-            FollowMouseOnEdge();
+        if (!GameManager.Instance.drawMultipleSelectionBox)
+        {
+            CheckFollowingMouse();
+            if (GameManager.Instance.selectedUnits.Count > 0 && !followingMouse && followUnit)
+                FollowUnit();
+            else if (followingMouse && !followUnit)
+                FollowMouseOnEdge();
+        }
     }
 
     void FollowUnit()
