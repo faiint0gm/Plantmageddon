@@ -28,12 +28,21 @@ public class Unit : MonoBehaviour
     protected AIPath aiPath;
     protected float endReachedDistance;
 
+    public bool isChangingForm;
     bool takingOverStarted;
     bool killingStarted;
+    RaycastHit2D hit2d;
 
     public UnitState UnitState
     {
         get { return unitState; }
+        set { unitState = value; }
+    }
+
+    public UnitType UnitType
+    {
+        get { return unitType; }
+        
     }
 
     private void Start()
@@ -62,7 +71,7 @@ public class Unit : MonoBehaviour
 
     public void ResetCurrentHp(Unit unit)
     {
-        unit.currentHp = hp;
+        unit.currentHp = unit.hp;
     }
 
     void InitHp()
@@ -78,6 +87,7 @@ public class Unit : MonoBehaviour
 
     public void ChangeForm(UnitType attackerType)
     {
+        isChangingForm = true;
         InterruptPathFollowing();
         int randomNumber = 0;
         if (attackerType.ToString().Contains("enemy"))
@@ -88,46 +98,55 @@ public class Unit : MonoBehaviour
         {
             randomNumber = (int)attackerType;
         }
-        GameObject go = Instantiate(GameManager.Instance.unitsPrefabs[(UnitType)randomNumber], transform.position,
+        Debug.Log("Change form! Called from: " + attackerType.ToString());
+        Instantiate(GameManager.Instance.unitsPrefabs[(UnitType)randomNumber], transform.position,
                         Quaternion.identity, GameManager.Instance.unitsParent);
-        if(randomNumber < 4)
-        {
-            GameManager.Instance.playerUnits.Add(go.GetComponent<PlayerUnit>());
-        }
-        else
-        {
-            GameManager.Instance.enemyUnits.Add(go.GetComponent<EnemyUnit>());
-        }
         Die();
     }
 
     public virtual void Die()
     {
-        GameManager.Instance.allUnits.Remove(this);
+        GameManager.Instance.allUnits.Remove(this); 
         Destroy(gameObject);
+    }
+
+    public void BlowOver()
+    {
+        foreach(EnemyUnit e in GameManager.Instance.enemyUnits)
+        {
+            if(Vector3.Distance(transform.position,e.transform.position)<rangeToAttack)
+            {
+                StartCoroutine(TakeOver(e));
+            }
+        }
     }
 
     public IEnumerator TakeOver(Unit unit)
     {
         unit.InterruptPathFollowing();
+        unit.aiPath.canMove = false;
         while (unit.currentHp > 0)
         {
             yield return new WaitForSeconds(damageTime);
             GiveDamage(unit);
+            unitState = UnitState.TAKING_OVER;
             if (unitState != UnitState.TAKING_OVER)
             {
                 ResetCurrentHp(unit);
+                unit.unitState = UnitState.IDLE;
+                unit.aiPath.canMove = true;
                 break;
             }
         }
         if(unit.currentHp <=0)
         {
             unitState = UnitState.IDLE;
-            if (unit != null)
+            if (unit != null && !unit.isChangingForm)
             {
                 unit.ChangeForm(unitType);
             }
             takingOverStarted = false;
+            unit.aiPath.canMove = false;
         }
     }
 
@@ -179,7 +198,7 @@ public class Unit : MonoBehaviour
         targetUnit = targetObj;
     }
 
-    protected void FollowAndTakeOver()
+    protected virtual void FollowAndTakeOver()
     {
         if (takingOverStarted)
         {
@@ -198,6 +217,26 @@ public class Unit : MonoBehaviour
         }
     }
 
+    protected void FollowAndBlowOver()
+    {
+        if(takingOverStarted)
+        {
+            target = transform.position;
+        }
+        else
+        {
+            target = targetUnit.transform.position;
+            target = new Vector3(target.x, target.y, transform.position.z);
+        }
+        destinationSetter.TargetPositionSet(target);
+        if (Vector3.Distance(transform.position, target) <= rangeToAttack && !takingOverStarted)
+        {
+            takingOverStarted = true;
+            BlowOver();
+            Invoke("Die",0.2f);
+        }
+    }
+
     protected void FollowAndKill()
     {
         target = targetUnit.transform.position;
@@ -205,15 +244,34 @@ public class Unit : MonoBehaviour
         destinationSetter.TargetPositionSet(target);
         if (Vector3.Distance(transform.position, target) <= rangeToAttack && !killingStarted)
         {
+            Debug.DrawRay(transform.position, (targetUnit.transform.position-transform.position).normalized, Color.red,3f);
+            hit2d = Physics2D.Raycast(transform.position, (targetUnit.transform.position - transform.position).normalized,
+                rangeToAttack);
+
+            Debug.Log("Raycast hit : " + hit2d.collider.gameObject.layer.ToString());
+
             killingStarted = true;
             target = transform.position;
             StartCoroutine(Kill(targetUnit));
         }
     }
 
-    protected void InterruptPathFollowing()
+    public void InterruptPathFollowing()
     {
+        StopAllCoroutines();
         target = transform.position;
         targetUnit = null;
+    }
+
+    private void Update()
+    {
+        if (unitState == UnitState.IDLE && !aiPath.canMove)
+        {
+            aiPath.canMove = true;
+        }
+        if (takingOverStarted)
+        {
+            InterruptPathFollowing();
+        }
     }
 }

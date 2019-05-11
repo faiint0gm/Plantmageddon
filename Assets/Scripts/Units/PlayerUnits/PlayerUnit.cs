@@ -11,6 +11,7 @@ public class PlayerUnit : Unit,IPointerClickHandler
     {
         GameManager.Instance.allUnits.Add(this);
         GameManager.Instance.playerUnits.Add(this);
+        Debug.Log("PlayerUnit Awake: " + gameObject.name);
         destinationSetter = GetComponent<AIDestinationSetter>();
         aiPath = GetComponent<AIPath>();
         if (destinationSetter != null)
@@ -44,13 +45,21 @@ public class PlayerUnit : Unit,IPointerClickHandler
 
     void Update()
     {
+
         if (targetUnit != null)
         {
-                if (unitState == UnitState.TAKING_OVER)
+            if (unitState == UnitState.TAKING_OVER)
+            {
+                aiPath.endReachedDistance = rangeToAttack;
+                if (unitType == UnitType.playerBlower)
                 {
-                    aiPath.endReachedDistance = rangeToAttack;
+                    FollowAndBlowOver();
+                }
+                else
+                {
                     FollowAndTakeOver();
                 }
+            }
         }
         else
         {
@@ -63,6 +72,10 @@ public class PlayerUnit : Unit,IPointerClickHandler
 
     public override void Die()
     {
+        if (GameManager.Instance.selectedUnits.Contains(this))
+        {
+            GameManager.Instance.selectedUnits.Remove(this);
+        }
         GameManager.Instance.playerUnits.Remove(this);
         base.Die();
     }
