@@ -10,6 +10,8 @@ public struct UnitsPrefabs
 }
 public class GameManager : MonoBehaviour
 {
+    private bool initialized;
+
     static GameManager _instance;
     public static GameManager Instance
     {
@@ -26,13 +28,13 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCamera;
 
-    [HideInInspector]
+
     public List<Unit> allUnits = new List<Unit>();
-    [HideInInspector]
+
     public List<PlayerUnit>playerUnits = new List<PlayerUnit>();
-    [HideInInspector]
+
     public List<EnemyUnit> enemyUnits = new List<EnemyUnit>();
-    [HideInInspector]
+
     public List<PlayerUnit> selectedUnits = new List<PlayerUnit>();
 
     [SerializeField]
@@ -42,6 +44,10 @@ public class GameManager : MonoBehaviour
     public Transform unitsParent;
 
     public Dictionary<UnitType, GameObject> unitsPrefabs = new Dictionary<UnitType, GameObject>();
+
+    public delegate void InitAction();
+    public event InitAction OnInitialized;
+
     void Awake()
     {
         if (_instance == null)
@@ -52,14 +58,17 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        foreach(UnitsPrefabs prefab in unitPrefabs)
-        {
-            unitsPrefabs.Add(prefab.unitType, prefab.unitPrefab);
-        }
+        Init();
     }
 
     void Update()
     {
+        if(initialized)
+        {
+            OnInitialized?.Invoke();
+            initialized = false;
+        }
+
         if(selectedUnits.Count >0)
         {
             if(Input.GetMouseButton(1))
@@ -69,4 +78,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Init()
+    {
+        foreach (UnitsPrefabs prefab in unitPrefabs)
+        {
+            unitsPrefabs.Add(prefab.unitType, prefab.unitPrefab);
+        }
+        initialized = true;
+    }
 }

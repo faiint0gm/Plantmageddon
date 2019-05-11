@@ -21,24 +21,30 @@ public class Unit : MonoBehaviour
     protected UnitState unitState;
     protected int currentHp;
     protected int killingHp;
-    protected GameObject targetObject;
+    protected Unit targetUnit;
     protected Vector3 target;
 
     protected AIDestinationSetter destinationSetter;
     protected AIPath aiPath;
+    protected float endReachedDistance;
+
+    bool takingOverStarted;
+    bool killingStarted;
 
     public UnitState UnitState
     {
         get { return unitState; }
     }
 
-    private void Awake()
+    private void Start()
     {
-        ResetHp(this);
+        InitHp();
+        unitState = UnitState.IDLE;
     }
 
     public void TakeDamage(int dmg, bool isKilling = false)
     {
+        unitState = UnitState.BEING_ATTACKED;
         currentHp -= dmg;
         if(isKilling)
         {
@@ -54,10 +60,15 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void ResetHp(Unit unit)
+    public void ResetCurrentHp(Unit unit)
     {
         unit.currentHp = hp;
-        unit.killingHp = hp;
+    }
+
+    void InitHp()
+    {
+        currentHp = hp;
+        killingHp = hp;
     }
 
     public void GiveDamage(Unit unit,bool killable = false)
@@ -65,16 +76,17 @@ public class Unit : MonoBehaviour
         unit.TakeDamage(damage, killable);
     }
 
-    public void ChangeForm()
+    public void ChangeForm(UnitType attackerType)
     {
+        InterruptPathFollowing();
         int randomNumber = 0;
-        if (unitType.ToString().Contains("player"))
+        if (attackerType.ToString().Contains("enemy"))
         {
             randomNumber = Random.Range(4, 6);
         }
         else
         {
-            randomNumber = Random.Range(0, 3);
+            randomNumber = (int)attackerType;
         }
         GameObject go = Instantiate(GameManager.Instance.unitsPrefabs[(UnitType)randomNumber], transform.position,
                         Quaternion.identity, GameManager.Instance.unitsParent);
@@ -92,62 +104,116 @@ public class Unit : MonoBehaviour
     public virtual void Die()
     {
         GameManager.Instance.allUnits.Remove(this);
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     public IEnumerator TakeOver(Unit unit)
     {
-        while (unit.hp > 0)
+        unit.InterruptPathFollowing();
+        while (unit.currentHp > 0)
         {
             yield return new WaitForSeconds(damageTime);
             GiveDamage(unit);
             if (unitState != UnitState.TAKING_OVER)
             {
-                ResetHp(unit);
+                ResetCurrentHp(unit);
                 break;
             }
+        }
+        if(unit.currentHp <=0)
+        {
+            unitState = UnitState.IDLE;
+            if (unit != null)
+            {
+                unit.ChangeForm(unitType);
+            }
+            takingOverStarted = false;
         }
     }
 
     public IEnumerator Kill(Unit unit)
     {
-        while (unit.hp > 0)
+        while (unit.killingHp > 0)
         {
             yield return new WaitForSeconds(damageTime);
+            if (unit == null)
+            {
+                killingStarted = false;
+                unitState = UnitState.IDLE;
+                break;
+            }
             GiveDamage(unit,true);
             if (unitState != UnitState.KILLING)
             {
-                ResetHp(unit);
-                break;
+                killingStarted = false;
+                yield break;
             }
+            if(Vector3.Distance(transform.position,unit.transform.position)>rangeToAttack)
+            {
+                killingStarted = false;
+                yield break;
+            }
+
+        }
+        if (unit != null)
+        {
+            if (unit.killingHp <= 0)
+            {
+                unitState = UnitState.IDLE;
+                if (unit != null)
+                {
+                    unit.Die();
+                }
+                killingStarted = false;
+            }
+        }
+        else
+        {
+            yield break;
         }
     }
 
-    public void TakeOverSelectedTarget(GameObject targetObj)
+    public void TakeOverSelectedTarget(Unit targetObj)
     {
         unitState = UnitState.TAKING_OVER;
-        targetObject = targetObj;
+        targetUnit = targetObj;
     }
 
     protected void FollowAndTakeOver()
     {
-        target = targetObject.transform.position;
-        target = new Vector3(target.x, target.y, transform.position.z);
-        destinationSetter.TargetPositionSet(target);
-        if (Vector3.Distance(transform.position, target) <= rangeToAttack)
+        if (takingOverStarted)
         {
-            StartCoroutine(TakeOver(targetObject.GetComponent<Unit>()));
+            target = transform.position;
+        }
+        else
+        {
+            target = targetUnit.transform.position;
+            target = new Vector3(target.x, target.y, transform.position.z);
+        }
+        destinationSetter.TargetPositionSet(target);
+        if (Vector3.Distance(transform.position, target) <= rangeToAttack && !takingOverStarted)
+        {
+            takingOverStarted = true;
+            StartCoroutine(TakeOver(targetUnit));
         }
     }
 
     protected void FollowAndKill()
     {
-        target = targetObject.transform.position;
+        target = targetUnit.transform.position;
         target = new Vector3(target.x, target.y, transform.position.z);
         destinationSetter.TargetPositionSet(target);
-        if (Vector3.Distance(transform.position, target) <= rangeToAttack)
+        if (Vector3.Distance(transform.position, target) <= rangeToAttack && !killingStarted)
         {
-            StartCoroutine(Kill(targetObject.GetComponent<Unit>()));
+            killingStarted = true;
+            target = transform.position;
+            StartCoroutine(Kill(targetUnit));
         }
+    }
+
+    protected void InterruptPathFollowing()
+    {
+        target = transform.position;
+        targetUnit = null;
     }
 }

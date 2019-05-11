@@ -7,9 +7,10 @@ using Pathfinding;
 public class PlayerUnit : Unit,IPointerClickHandler
 {
 
-
     public void Awake()
     {
+        GameManager.Instance.allUnits.Add(this);
+        GameManager.Instance.playerUnits.Add(this);
         destinationSetter = GetComponent<AIDestinationSetter>();
         aiPath = GetComponent<AIPath>();
         if (destinationSetter != null)
@@ -19,12 +20,18 @@ public class PlayerUnit : Unit,IPointerClickHandler
         if (aiPath != null)
         {
             aiPath.maxSpeed = moveSpeed;
+            endReachedDistance = aiPath.endReachedDistance;
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if(GameManager.Instance.selectedUnits.Count>0)
+        {
+            GameManager.Instance.selectedUnits.Clear();
+        }
         GameManager.Instance.selectedUnits.Add(this);
+        CameraController.followUnit = true;
         Debug.Log("PlayerUnit : "+unitType.ToString()+ " Clicked");
     }
 
@@ -37,20 +44,20 @@ public class PlayerUnit : Unit,IPointerClickHandler
 
     void Update()
     {
-        if (targetObject != null)
+        if (targetUnit != null)
         {
-            if (targetObject.GetComponent<Unit>().UnitState != UnitState.BEING_ATTACKED)
-            {
                 if (unitState == UnitState.TAKING_OVER)
                 {
+                    aiPath.endReachedDistance = rangeToAttack;
                     FollowAndTakeOver();
                 }
-                if (unitState == UnitState.KILLING)
-                {
-                    FollowAndKill();
-                }
+        }
+        else
+        {
+            if (aiPath != null)
+            {
+                aiPath.endReachedDistance = endReachedDistance;
             }
-
         }
     }
 

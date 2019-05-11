@@ -22,6 +22,7 @@ namespace Pathfinding {
 		IAstarAI ai;
 
 		void OnEnable () {
+            TargetPositionSet(transform.position);
 			ai = GetComponent<IAstarAI>();
 			// Update the destination right before searching for a path as well.
 			// This is enough in theory, but this script will also update the destination every
@@ -43,7 +44,6 @@ namespace Pathfinding {
         public void TargetPositionSet(Vector3 pos)
         {
             playerTarget = pos;
-            Debug.Log("Target position: " + playerTarget);
         }
 	}
 }

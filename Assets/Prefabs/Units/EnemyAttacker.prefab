@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6682292578710246764}
+  - component: {fileID: 5823913425727257051}
   - component: {fileID: 8263845099321790563}
   - component: {fileID: 4162105579638136088}
   - component: {fileID: 1927278915697173578}
   - component: {fileID: 6840971786588044547}
   - component: {fileID: 2908803183849540832}
-  - component: {fileID: 5823913425727257051}
   m_Layer: 0
   m_Name: EnemyAttacker
   m_TagString: Untagged
@@ -36,6 +36,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5823913425727257051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197016130511037129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe6cf1dc4c08b24ea6f1b34103b2552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 8
+  damage: 1
+  damageTime: 0.5
+  rangeToAttack: 40
+  moveSpeed: 15
+  unitType: 5
 --- !u!212 &8263845099321790563
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -189,21 +207,3 @@ MonoBehaviour:
   version: 1
   target: {fileID: 0}
   playerTarget: {x: 0, y: 0, z: 0}
---- !u!114 &5823913425727257051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197016130511037129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fe6cf1dc4c08b24ea6f1b34103b2552, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 8
-  damage: 1
-  damageTime: 0.5
-  rangeToAttack: 2
-  moveSpeed: 15
-  unitType: 5

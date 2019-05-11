@@ -8,20 +8,27 @@ public class SpawnPoint : MonoBehaviour
     UnitType unitType;
     [SerializeField]
     int amount;
+    [SerializeField]
+    float randomPositionRange = 3;
 
     void Start()
     {
+       GameManager.Instance.OnInitialized += Spawn;
+    }
+
+    void Spawn()
+    {
         for (int i = 0; i < amount; i++)
         {
-            Vector3 randomVector = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
-            if(amount == 1)
+            Vector3 randomVector = new Vector3(Random.Range(-randomPositionRange, randomPositionRange), 
+                Random.Range(-randomPositionRange, randomPositionRange), 0);
+            if (amount == 1)
             { randomVector = Vector3.zero; }
-            Instantiate(GameManager.Instance.unitsPrefabs[unitType], 
+            Instantiate(GameManager.Instance.unitsPrefabs[unitType],
                 transform.position + randomVector,
                 Quaternion.identity,
                 GameManager.Instance.unitsParent);
         }
     }
-
 
 }

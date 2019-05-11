@@ -51,7 +51,7 @@ MonoBehaviour:
   hp: 15
   damage: 1
   damageTime: 0.5
-  rangeToAttack: 2
+  rangeToAttack: 15
   moveSpeed: 15
   unitType: 4
 --- !u!212 &3132428933421925744

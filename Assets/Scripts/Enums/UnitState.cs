@@ -4,6 +4,6 @@ public enum UnitState
     TAKING_OVER,
     KILLING,
     IDLE,
-    MOVING,
+    RUNNING,
     BEING_ATTACKED
 }

@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
     int screenHeight;
 
     public static bool followingMouse;
-
+    public static bool followUnit;
     private void Awake()
     {
         screenWidth = Screen.width;
@@ -32,18 +32,21 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         CheckFollowingMouse();
-        if (GameManager.Instance.selectedUnits.Count > 0 && !followingMouse)
+        if (GameManager.Instance.selectedUnits.Count > 0 && !followingMouse && followUnit)
             FollowUnit();
-        else
+        else if (followingMouse && !followUnit)
             FollowMouseOnEdge();
     }
 
     void FollowUnit()
     {
-        Vector3 desiredPosition = GameManager.Instance.selectedUnits[0].transform.position
-            + GameManager.Instance.cameraToUnitOffset;
-        Vector3 position = Vector3.Lerp(transform.position, desiredPosition, lerpTime * Time.deltaTime);
-        transform.position = position;
+        if (GameManager.Instance.selectedUnits.Count > 0)
+        {
+            Vector3 desiredPosition = GameManager.Instance.selectedUnits[0].transform.position;
+            desiredPosition = new Vector3(desiredPosition.x, desiredPosition.y, transform.position.z);
+            Vector3 position = Vector3.Lerp(transform.position, desiredPosition, lerpTime * Time.deltaTime);
+            transform.position = position;
+        }
     }
 
     void FollowMouseOnEdge()
@@ -68,14 +71,18 @@ public class CameraController : MonoBehaviour
 
     void CheckFollowingMouse()
     {
-        if ((Input.mousePosition.x > screenWidth - xStartMoving && Input.mousePosition.x <= screenWidth) ||
+        if ((Input.mousePosition.x > Screen.width - xStartMoving && Input.mousePosition.x <= Screen.width) ||
             (Input.mousePosition.x < 0 + xStartMoving && Input.mousePosition.x >= 0) ||
-            (Input.mousePosition.y > screenHeight - yStartMoving && Input.mousePosition.y <= screenHeight) ||
+            (Input.mousePosition.y > Screen.height - yStartMoving && Input.mousePosition.y <= Screen.height) ||
             (Input.mousePosition.y < 0 + yStartMoving && Input.mousePosition.y >= 0))
         {
             followingMouse = true;
+            followUnit = false;
         }
-        else followingMouse = false;
+        else 
+        {
+            followingMouse = false;
+        }
 
     }
 }

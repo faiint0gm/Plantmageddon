@@ -51,7 +51,7 @@ MonoBehaviour:
   hp: 10
   damage: 1
   damageTime: 0.25
-  rangeToAttack: 2
+  rangeToAttack: 15
   moveSpeed: 30
   unitType: 0
 --- !u!212 &6862265522919274769
@@ -185,10 +185,10 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 0.82
+  slowdownDistance: 0
   pickNextWaypointDist: 4.89
-  endReachedDistance: 4.16
-  alwaysDrawGizmos: 0
+  endReachedDistance: 5
+  alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
