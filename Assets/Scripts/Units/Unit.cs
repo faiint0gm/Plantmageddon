@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Unit : MonoBehaviour
+public class Unit : MonoBehaviour
 {
     [SerializeField]
-    int hp;
+    protected int hp;
     [SerializeField]
-    int damage;
+    protected int damage;
     [SerializeField]
-    float moveSpeed;
+    protected int damageTime;
     [SerializeField]
-    UnitType unitType;
+    protected float moveSpeed;
+    [SerializeField]
+    protected UnitType unitType;
+    
+    protected int currentHp;
 }
