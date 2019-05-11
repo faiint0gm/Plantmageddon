@@ -28,13 +28,13 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCamera;
 
-
+    [HideInInspector]
     public List<Unit> allUnits = new List<Unit>();
-
+    [HideInInspector]
     public List<PlayerUnit>playerUnits = new List<PlayerUnit>();
-
+    [HideInInspector]
     public List<EnemyUnit> enemyUnits = new List<EnemyUnit>();
-
+    [HideInInspector]
     public List<PlayerUnit> selectedUnits = new List<PlayerUnit>();
 
     [SerializeField]

@@ -40,7 +40,7 @@ public class CameraController : MonoBehaviour
 
     void FollowUnit()
     {
-        if (GameManager.Instance.selectedUnits.Count > 0)
+        if (GameManager.Instance.selectedUnits[0] != null)
         {
             Vector3 desiredPosition = GameManager.Instance.selectedUnits[0].transform.position;
             desiredPosition = new Vector3(desiredPosition.x, desiredPosition.y, transform.position.z);
