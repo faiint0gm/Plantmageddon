@@ -36,11 +36,13 @@ public class Unit : MonoBehaviour
     public UnitState UnitState
     {
         get { return unitState; }
+        set { unitState = value; }
     }
 
     public UnitType UnitType
     {
         get { return unitType; }
+        
     }
 
     private void Start()
@@ -263,7 +265,11 @@ public class Unit : MonoBehaviour
 
     private void Update()
     {
-        if(takingOverStarted)
+        if (unitState == UnitState.IDLE && !aiPath.canMove)
+        {
+            aiPath.canMove = true;
+        }
+        if (takingOverStarted)
         {
             InterruptPathFollowing();
         }

@@ -45,6 +45,7 @@ public class PlayerUnit : Unit,IPointerClickHandler
 
     void Update()
     {
+
         if (targetUnit != null)
         {
             if (unitState == UnitState.TAKING_OVER)
