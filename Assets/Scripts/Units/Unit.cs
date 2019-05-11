@@ -106,6 +106,7 @@ public class Unit : MonoBehaviour
     public IEnumerator TakeOver(Unit unit)
     {
         unit.InterruptPathFollowing();
+        unit.aiPath.canMove = false;
         while (unit.currentHp > 0)
         {
             yield return new WaitForSeconds(damageTime);
@@ -113,6 +114,8 @@ public class Unit : MonoBehaviour
             if (unitState != UnitState.TAKING_OVER)
             {
                 ResetCurrentHp(unit);
+                unit.aiPath.canMove = true;
+                GameManager.Instance.lockMovement = false;
                 break;
             }
         }
@@ -124,6 +127,7 @@ public class Unit : MonoBehaviour
                 unit.ChangeForm(unitType);
             }
             takingOverStarted = false;
+            unit.aiPath.canMove = false;
         }
     }
 
@@ -217,5 +221,13 @@ public class Unit : MonoBehaviour
     {
         target = transform.position;
         targetUnit = null;
+    }
+
+    private void Update()
+    {
+        if(takingOverStarted)
+        {
+            InterruptPathFollowing();
+        }
     }
 }
