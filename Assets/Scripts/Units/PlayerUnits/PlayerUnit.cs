@@ -6,9 +6,8 @@ using Pathfinding;
 
 public class PlayerUnit : Unit,IPointerClickHandler
 {
-    [SerializeField]
-    protected int killHP;
     protected AIDestinationSetter destinationSetter;
+    protected AIPath aiPath;
 
     bool moving;
     Vector3 target;
@@ -16,9 +15,14 @@ public class PlayerUnit : Unit,IPointerClickHandler
     public void Awake()
     {
         destinationSetter = GetComponent<AIDestinationSetter>();
+        aiPath = GetComponent<AIPath>();
         if (destinationSetter != null)
         {
             destinationSetter.playerTarget = transform.position;
+        }
+        if (aiPath != null)
+        {
+            aiPath.maxSpeed = moveSpeed;
         }
     }
 
@@ -40,4 +44,9 @@ public class PlayerUnit : Unit,IPointerClickHandler
 
     }
 
+    public override void Die()
+    {
+        GameManager.Instance.playerUnits.Remove(this);
+        base.Die();
+    }
 }

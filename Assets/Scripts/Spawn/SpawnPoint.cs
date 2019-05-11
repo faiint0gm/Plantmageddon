@@ -11,7 +11,16 @@ public class SpawnPoint : MonoBehaviour
 
     void Start()
     {
-        
+        for (int i = 0; i < amount; i++)
+        {
+            Vector3 randomVector = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
+            if(amount == 1)
+            { randomVector = Vector3.zero; }
+            Instantiate(GameManager.Instance.unitsPrefabs[unitType], 
+                transform.position + randomVector,
+                Quaternion.identity,
+                GameManager.Instance.unitsParent);
+        }
     }
 
 
