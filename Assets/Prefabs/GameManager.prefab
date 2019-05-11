@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8140920129053521489}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -68,5 +68,10 @@ MonoBehaviour:
   - unitType: 6
     unitPrefab: {fileID: 197016130511037129, guid: d43bab9419f92df4e9cc645b4ef7017b,
       type: 3}
-  cameraToUnitOffset: {x: 0, y: 0, z: 0}
+  playerUnitsProgress: {fileID: 0}
+  playerAmountText: {fileID: 0}
+  enemyAmountText: {fileID: 0}
   unitsParent: {fileID: 0}
+  drawMultipleSelectionBox: 0
+  lockMovement: 0
+  selectionTexture: {fileID: 2800000, guid: 13503e5f43c532440a6ea453384c4d6a, type: 3}
