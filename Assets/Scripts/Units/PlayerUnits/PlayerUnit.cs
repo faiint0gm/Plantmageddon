@@ -6,19 +6,19 @@ using Pathfinding;
 
 public class PlayerUnit : Unit,IPointerClickHandler
 {
-    [SerializeField]
-    protected int killHP;
-    protected AIDestinationSetter destinationSetter;
 
-    bool moving;
-    Vector3 target;
 
     public void Awake()
     {
         destinationSetter = GetComponent<AIDestinationSetter>();
+        aiPath = GetComponent<AIPath>();
         if (destinationSetter != null)
         {
             destinationSetter.playerTarget = transform.position;
+        }
+        if (aiPath != null)
+        {
+            aiPath.maxSpeed = moveSpeed;
         }
     }
 
@@ -37,7 +37,26 @@ public class PlayerUnit : Unit,IPointerClickHandler
 
     void Update()
     {
+        if (targetObject != null)
+        {
+            if (targetObject.GetComponent<Unit>().UnitState != UnitState.BEING_ATTACKED)
+            {
+                if (unitState == UnitState.TAKING_OVER)
+                {
+                    FollowAndTakeOver();
+                }
+                if (unitState == UnitState.KILLING)
+                {
+                    FollowAndKill();
+                }
+            }
 
+        }
     }
 
+    public override void Die()
+    {
+        GameManager.Instance.playerUnits.Remove(this);
+        base.Die();
+    }
 }

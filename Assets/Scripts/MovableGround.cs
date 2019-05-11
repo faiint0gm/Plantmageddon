@@ -10,7 +10,6 @@ public class MovableGround : MonoBehaviour, IPointerClickHandler
         
         foreach (PlayerUnit player in GameManager.Instance.selectedUnits)
         {
-            Debug.Log("Moving!");
             player.MoveToSelectedTarget();    
         }
     }
