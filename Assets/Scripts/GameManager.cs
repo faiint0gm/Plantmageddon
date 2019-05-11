@@ -153,8 +153,8 @@ public class GameManager : MonoBehaviour
         float xLow, yLow, xHigh, yHigh;
         if(startPos.x <endPos.x)
         {
-            xLow = endPos.x;
-            xHigh = startPos.x;
+            xLow = startPos.x;
+            xHigh = endPos.x;
         }
         else
         {
