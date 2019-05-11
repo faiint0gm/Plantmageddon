@@ -64,7 +64,7 @@ public class Unit : MonoBehaviour
 
     public void ResetCurrentHp(Unit unit)
     {
-        unit.currentHp = hp;
+        unit.currentHp = unit.hp;
     }
 
     void InitHp()
@@ -114,8 +114,8 @@ public class Unit : MonoBehaviour
             if (unitState != UnitState.TAKING_OVER)
             {
                 ResetCurrentHp(unit);
+                unit.unitState = UnitState.IDLE;
                 unit.aiPath.canMove = true;
-                GameManager.Instance.lockMovement = false;
                 break;
             }
         }
@@ -179,7 +179,7 @@ public class Unit : MonoBehaviour
         targetUnit = targetObj;
     }
 
-    protected void FollowAndTakeOver()
+    protected virtual void FollowAndTakeOver()
     {
         if (takingOverStarted)
         {
