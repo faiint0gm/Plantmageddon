@@ -63,6 +63,11 @@ public class PlayerUnit : Unit,IPointerClickHandler
         }
         else
         {
+            if(unitState == UnitState.TAKING_OVER)
+            {
+                unitState = UnitState.IDLE;
+                aiPath.canMove = true;
+            }
             if (aiPath != null)
             {
                 aiPath.endReachedDistance = endReachedDistance;
