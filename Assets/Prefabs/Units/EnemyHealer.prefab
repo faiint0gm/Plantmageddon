@@ -50,10 +50,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 15
   damage: 1
-  damageTime: 0.5
+  damageTime: 1
   rangeToAttack: 15
-  moveSpeed: 15
+  moveSpeed: 30
   unitType: 4
+  isChangingForm: 0
+  safeDistance: 30
 --- !u!212 &3132428933421925744
 SpriteRenderer:
   m_ObjectHideFlags: 0

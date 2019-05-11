@@ -48,12 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90671af3ee89f0c48ac7d756e2efd873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 3
   damage: 1
   damageTime: 0.25
   rangeToAttack: 5
-  moveSpeed: 50
+  moveSpeed: 20
   unitType: 0
+  isChangingForm: 0
 --- !u!212 &6862265522919274769
 SpriteRenderer:
   m_ObjectHideFlags: 0

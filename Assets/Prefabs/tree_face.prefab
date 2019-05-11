@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2685123658246901874}
   - component: {fileID: 4874357907342084082}
   - component: {fileID: 5300110284668457274}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree_face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3943700015748741495}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.5, y: 11.6, z: -8.8}
+  m_LocalPosition: {x: -32.5, y: 12.4, z: -8.8}
   m_LocalScale: {x: 11.921545, y: 8.832842, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -93,7 +93,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.87036705, y: -2.4605627}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -104,5 +104,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.09, y: 6.78}
+  m_Size: {x: 3.349266, y: 1.8588753}
   m_EdgeRadius: 0
