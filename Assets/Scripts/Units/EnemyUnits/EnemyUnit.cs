@@ -35,6 +35,10 @@ public class EnemyUnit : Unit,IPointerClickHandler
 
     public override void Die()
     {
+        if (targetUnit != null)
+        {
+            targetUnit.UnitState = UnitState.IDLE;
+        }
         GameManager.Instance.enemyUnits.Remove(this);
         base.Die();
     }
