@@ -51,6 +51,7 @@ MonoBehaviour:
   hp: 10
   damage: 1
   damageTime: 0.25
+  rangeToAttack: 2
   moveSpeed: 30
   unitType: 0
 --- !u!212 &6862265522919274769

@@ -6,11 +6,7 @@ using Pathfinding;
 
 public class PlayerUnit : Unit,IPointerClickHandler
 {
-    protected AIDestinationSetter destinationSetter;
-    protected AIPath aiPath;
 
-    bool moving;
-    Vector3 target;
 
     public void Awake()
     {
@@ -41,7 +37,21 @@ public class PlayerUnit : Unit,IPointerClickHandler
 
     void Update()
     {
+        if (targetObject != null)
+        {
+            if (targetObject.GetComponent<Unit>().UnitState != UnitState.BEING_ATTACKED)
+            {
+                if (unitState == UnitState.TAKING_OVER)
+                {
+                    FollowAndTakeOver();
+                }
+                if (unitState == UnitState.KILLING)
+                {
+                    FollowAndKill();
+                }
+            }
 
+        }
     }
 
     public override void Die()
