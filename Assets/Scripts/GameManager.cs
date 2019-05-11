@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     UnitsPrefabs [] unitPrefabs;
+        public Vector3 cameraToUnitOffset;
 
     public Transform unitsParent;
 

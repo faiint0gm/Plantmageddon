@@ -6545,6 +6545,7 @@ MonoBehaviour:
     unitPrefab: {fileID: 0}
   - unitType: 6
     unitPrefab: {fileID: 0}
+  cameraToUnitOffset: {x: 0, y: 0, z: 0}
   unitsParent: {fileID: 1421398131}
 --- !u!4 &1701846764
 Transform:
@@ -6874,6 +6875,7 @@ GameObject:
   - component: {fileID: 1782236244}
   - component: {fileID: 1782236243}
   - component: {fileID: 1782236246}
+  - component: {fileID: 1782236247}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6961,6 +6963,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 1
+--- !u!114 &1782236247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782236242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279b804475861c743a4ee036e8c1bc9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lerpTime: 0.5
+  xStartMoving: 50
+  yStartMoving: 50
+  moveSpeed: 15
 --- !u!1 &1854928728
 GameObject:
   m_ObjectHideFlags: 0
