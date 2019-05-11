@@ -51,8 +51,8 @@ MonoBehaviour:
   hp: 10
   damage: 1
   damageTime: 0.25
-  rangeToAttack: 15
-  moveSpeed: 30
+  rangeToAttack: 5
+  moveSpeed: 50
   unitType: 0
 --- !u!212 &6862265522919274769
 SpriteRenderer:
