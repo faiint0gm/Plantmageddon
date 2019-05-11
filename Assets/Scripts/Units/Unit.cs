@@ -31,6 +31,7 @@ public class Unit : MonoBehaviour
     public bool isChangingForm;
     bool takingOverStarted;
     bool killingStarted;
+    RaycastHit2D hit2d;
 
     public UnitState UnitState
     {
@@ -93,16 +94,6 @@ public class Unit : MonoBehaviour
         Debug.Log("Change form! Called from: " + attackerType.ToString());
         Instantiate(GameManager.Instance.unitsPrefabs[(UnitType)randomNumber], transform.position,
                         Quaternion.identity, GameManager.Instance.unitsParent);
-        /*
-        if(randomNumber < 4)
-        {
-            GameManager.Instance.playerUnits.Add(go.GetComponent<PlayerUnit>());
-        }
-        else
-        {
-            GameManager.Instance.enemyUnits.Add(go.GetComponent<EnemyUnit>());
-        }
-        */
         Die();
     }
 
@@ -210,6 +201,12 @@ public class Unit : MonoBehaviour
         destinationSetter.TargetPositionSet(target);
         if (Vector3.Distance(transform.position, target) <= rangeToAttack && !killingStarted)
         {
+            Debug.DrawRay(transform.position, (targetUnit.transform.position-transform.position).normalized, Color.red,3f);
+            hit2d = Physics2D.Raycast(transform.position, (targetUnit.transform.position - transform.position).normalized,
+                rangeToAttack);
+
+            Debug.Log("Raycast hit : " + hit2d.collider.gameObject.layer.ToString());
+
             killingStarted = true;
             target = transform.position;
             StartCoroutine(Kill(targetUnit));
