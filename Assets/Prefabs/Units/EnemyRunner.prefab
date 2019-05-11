@@ -205,5 +205,6 @@ MonoBehaviour:
   damage: 0
   damageTime: 0.01
   rangeToAttack: 0
-  moveSpeed: 20
+  moveSpeed: 10
   unitType: 6
+  safeDistance: 30
