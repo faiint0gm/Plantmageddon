@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public struct UnitsPrefabs
@@ -11,19 +13,7 @@ public struct UnitsPrefabs
 public class GameManager : MonoBehaviour
 {
     private bool initialized;
-
-    static GameManager _instance;
-    public static GameManager Instance
-    {
-        get {
-            if (_instance == null)
-            {
-                GameObject go = new GameObject("Game Manager");
-                go.AddComponent<GameManager>();
-                _instance = go.GetComponent<GameManager>();
-            }
-            return _instance; }
-    }
+    public static GameManager Instance { get; private set; }
     int unitsAmount;
 
     public Camera mainCamera;
@@ -39,7 +29,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     UnitsPrefabs [] unitPrefabs;
-        public Vector3 cameraToUnitOffset;
+    [SerializeField]
+    Image playerUnitsProgress;
+    [SerializeField]
+    TextMeshProUGUI playerAmountText;
+    [SerializeField]
+    TextMeshProUGUI enemyAmountText;
 
     public Transform unitsParent;
 
@@ -50,9 +45,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (_instance == null)
+        if (Instance == null)
         {
-            _instance = this;
+            Instance = this;
         }
     }
 
@@ -76,6 +71,8 @@ public class GameManager : MonoBehaviour
                 selectedUnits.Clear();
             }
         }
+
+        UpdateAmounts();
     }
 
     private void Init()
@@ -85,5 +82,13 @@ public class GameManager : MonoBehaviour
             unitsPrefabs.Add(prefab.unitType, prefab.unitPrefab);
         }
         initialized = true;
+    }
+
+    void UpdateAmounts()
+    {
+        playerAmountText.text = string.Format("Evil plants: {0}", playerUnits.Count);
+        enemyAmountText.text = string.Format("Humans: {0}", enemyUnits.Count);
+        float percent = playerUnits.Count / (float)allUnits.Count;
+        playerUnitsProgress.fillAmount = percent;
     }
 }
