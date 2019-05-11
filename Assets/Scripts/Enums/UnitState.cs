@@ -5,5 +5,6 @@ public enum UnitState
     KILLING,
     IDLE,
     RUNNING,
-    BEING_ATTACKED
+    BEING_ATTACKED,
+    WAITING_FOR_BOMBER
 }

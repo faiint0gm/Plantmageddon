@@ -47,11 +47,18 @@ public class PlayerUnit : Unit,IPointerClickHandler
     {
         if (targetUnit != null)
         {
-                if (unitState == UnitState.TAKING_OVER)
+            if (unitState == UnitState.TAKING_OVER)
+            {
+                aiPath.endReachedDistance = rangeToAttack;
+                if (unitType == UnitType.playerBlower)
                 {
-                    aiPath.endReachedDistance = rangeToAttack;
+                    FollowAndBlowOver();
+                }
+                else
+                {
                     FollowAndTakeOver();
                 }
+            }
         }
         else
         {

@@ -38,6 +38,11 @@ public class Unit : MonoBehaviour
         get { return unitState; }
     }
 
+    public UnitType UnitType
+    {
+        get { return unitType; }
+    }
+
     private void Start()
     {
         InitHp();
@@ -103,6 +108,17 @@ public class Unit : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void BlowOver()
+    {
+        foreach(EnemyUnit e in GameManager.Instance.enemyUnits)
+        {
+            if(Vector3.Distance(transform.position,e.transform.position)<rangeToAttack)
+            {
+                StartCoroutine(TakeOver(e));
+            }
+        }
+    }
+
     public IEnumerator TakeOver(Unit unit)
     {
         unit.InterruptPathFollowing();
@@ -111,6 +127,7 @@ public class Unit : MonoBehaviour
         {
             yield return new WaitForSeconds(damageTime);
             GiveDamage(unit);
+            unitState = UnitState.TAKING_OVER;
             if (unitState != UnitState.TAKING_OVER)
             {
                 ResetCurrentHp(unit);
@@ -198,6 +215,26 @@ public class Unit : MonoBehaviour
         }
     }
 
+    protected void FollowAndBlowOver()
+    {
+        if(takingOverStarted)
+        {
+            target = transform.position;
+        }
+        else
+        {
+            target = targetUnit.transform.position;
+            target = new Vector3(target.x, target.y, transform.position.z);
+        }
+        destinationSetter.TargetPositionSet(target);
+        if (Vector3.Distance(transform.position, target) <= rangeToAttack && !takingOverStarted)
+        {
+            takingOverStarted = true;
+            BlowOver();
+            Invoke("Die",0.2f);
+        }
+    }
+
     protected void FollowAndKill()
     {
         target = targetUnit.transform.position;
@@ -217,8 +254,9 @@ public class Unit : MonoBehaviour
         }
     }
 
-    protected void InterruptPathFollowing()
+    public void InterruptPathFollowing()
     {
+        StopAllCoroutines();
         target = transform.position;
         targetUnit = null;
     }
