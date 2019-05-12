@@ -6,7 +6,7 @@ TextureImporter:
     21300002: Spritesheet_01_1
     21300004: Spritesheet_01_2
     21300006: Spritesheet_01_3
-    21300008: Spritesheet_01_4
+    21300008: BUtton gray
     21300010: Spritesheet_01_5
     21300012: Spritesheet_01_6
     21300014: Spritesheet_01_7
@@ -54,6 +54,11 @@ TextureImporter:
     21300098: Spritesheet_01_51
     21300100: Logo
     21300102: Spritesheet_01_35
+    21300104: BUtton_yellow
+    21300106: Main_bar_bg
+    21300108: popup_bg
+    21300110: popup_decoration
+    21300112: progress_bar_frame
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -511,6 +516,126 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: bacce4c0498aec849bd1be7cd431b182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUtton gray
+      rect:
+        serializedVersion: 2
+        x: 1285
+        y: 1388
+        width: 108
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 15, y: 0, z: 15, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e3e5bfc9a8a9b744abd2711c4f0233f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUtton_yellow
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 1388
+        width: 105
+        height: 93
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 16, y: 0, z: 16, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70af255b6f7e3e1409418279bd794915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Main_bar_bg
+      rect:
+        serializedVersion: 2
+        x: 1518
+        y: 1388
+        width: 120
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edb2f8ea0aa7f1944a8f27a330d67133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: popup_bg
+      rect:
+        serializedVersion: 2
+        x: 1657
+        y: 1398
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee630f252d3d5ec4392e214005e64507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: popup_decoration
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 868
+        width: 735
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46178780dc73a584ebe4186c824ab44e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress_bar_frame
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 762
+        width: 886
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9ed342319aa3a94e9fded1ca35afc0d
       vertices: []
       indices: 
       edges: []
