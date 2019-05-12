@@ -65,7 +65,7 @@ public class Unit : MonoBehaviour
     {
         if(sfxSource == null)
         {
-            gameObject.AddComponent<AudioSource>();
+            sfxSource = gameObject.AddComponent<AudioSource>();
             sfxSource.outputAudioMixerGroup = GameManager.Instance.sfxAudioGroup;
         }
         InitHp();
@@ -305,6 +305,7 @@ public class Unit : MonoBehaviour
                         animator.SetBool("isAttacking", false);
                         animator.SetBool("isBeingAttacked", false);
                         animator.SetBool("isWalking", false);
+                        sfxSource.Stop();
                     }
                     if (targetUnit != null || !aiPath.reachedEndOfPath )
                     {
@@ -379,6 +380,11 @@ public class Unit : MonoBehaviour
             sfxSource.loop = true;
             sfxSource.clip = clip;
             sfxSource.Play();
+        } else
+
+        {
+            if (!sfxSource.isPlaying)
+                sfxSource.Play();
         }
     }
 
