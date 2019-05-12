@@ -16,6 +16,8 @@ public class CameraController : MonoBehaviour
 
     int screenWidth;
     int screenHeight;
+    [HideInInspector]
+    public float lockYmin, lockYmax, lockXmin, lockXmax;
 
     public static bool followingMouse;
     public static bool followUnit;
@@ -34,9 +36,8 @@ public class CameraController : MonoBehaviour
         if (!GameManager.Instance.drawMultipleSelectionBox)
         {
             CheckFollowingMouse();
-            if (GameManager.Instance.selectedUnits.Count > 0 && !followingMouse && followUnit)
-                FollowUnit();
-            else if (followingMouse && !followUnit)
+
+           if (followingMouse && !followUnit)
                 FollowMouseOnEdge();
         }
     }
@@ -54,19 +55,19 @@ public class CameraController : MonoBehaviour
 
     void FollowMouseOnEdge()
     {
-        if (Input.mousePosition.x > screenWidth - xStartMoving && Input.mousePosition.x <= screenWidth)
+        if (Input.mousePosition.x > screenWidth - xStartMoving && Input.mousePosition.x <= screenWidth && !LockXMaxMovement())
         {
             transform.position += new Vector3(moveSpeed * Time.deltaTime,0,0);
         }
-        if (Input.mousePosition.x < 0 + xStartMoving && Input.mousePosition.x >= 0)
+        if (Input.mousePosition.x < 0 + xStartMoving && Input.mousePosition.x >= 0 && !LockXMinMovement())
         {
             transform.position -= new Vector3(moveSpeed * Time.deltaTime, 0, 0);
         }
-        if (Input.mousePosition.y > screenHeight - yStartMoving && Input.mousePosition.y <= screenHeight)
+        if (Input.mousePosition.y > screenHeight - yStartMoving && Input.mousePosition.y <= screenHeight && !LockYMaxMovement())
         {
             transform.position += new Vector3(0, moveSpeed * Time.deltaTime, 0);
         }
-        if (Input.mousePosition.y < 0 + yStartMoving && Input.mousePosition.y >= 0)
+        if (Input.mousePosition.y < 0 + yStartMoving && Input.mousePosition.y >= 0 && !LockYMinMovement())
         {
             transform.position -= new Vector3(0, moveSpeed * Time.deltaTime, 0);
         }
@@ -87,5 +88,37 @@ public class CameraController : MonoBehaviour
             followingMouse = false;
         }
 
+    }
+
+    bool LockXMinMovement()
+    {
+        if (transform.position.x <= lockXmin)
+            return true;
+        else
+            return false;
+    }
+
+    bool LockXMaxMovement()
+    {
+        if (transform.position.x >= lockXmax)
+            return true;
+        else
+            return false;
+    }
+
+    bool LockYMinMovement()
+    {
+        if (transform.position.y <= lockYmin)
+            return true;
+        else
+            return false;
+    }
+
+    bool LockYMaxMovement()
+    {
+        if (transform.position.y >= lockYmax)
+            return true;
+        else
+            return false;
     }
 }

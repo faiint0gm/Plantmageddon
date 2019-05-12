@@ -28,13 +28,16 @@ public class HPBar : MonoBehaviour
 
     void CheckAndSetBar()
     {
-        if (CurrentHP == MaxHP)
+        if (gameObject != null)
         {
-            gameObject.SetActive(false);
-        }
-        else if (CurrentHP != MaxHP)
-        {
-            gameObject.SetActive(true);
+            if (CurrentHP == MaxHP)
+            {
+                gameObject.SetActive(false);
+            }
+            else if (CurrentHP != MaxHP)
+            {
+                gameObject.SetActive(true);
+            }
         }
     }
 }
