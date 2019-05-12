@@ -110,8 +110,10 @@ public class EnemyUnit : Unit,IPointerClickHandler
         }
     }
 
-    private void Update()
+    protected override void Update()
     {
+        //base.Update();
+
         FindAndSetClosestTarget();
 
         if (targetUnit != null)

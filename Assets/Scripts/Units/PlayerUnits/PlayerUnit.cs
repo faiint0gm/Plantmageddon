@@ -6,9 +6,9 @@ using Pathfinding;
 
 public class PlayerUnit : Unit,IPointerClickHandler
 {
-
+    Material material;
     public void Awake()
-    {
+    {  
         GameManager.Instance.allUnits.Add(this);
         GameManager.Instance.playerUnits.Add(this);
         Debug.Log("PlayerUnit Awake: " + gameObject.name);
@@ -23,6 +23,11 @@ public class PlayerUnit : Unit,IPointerClickHandler
             aiPath.maxSpeed = moveSpeed;
             endReachedDistance = aiPath.endReachedDistance;
         }
+    }
+    protected override void Start()
+    {
+        base.Start();
+        material = GetComponent<SpriteRenderer>().material;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -43,10 +48,18 @@ public class PlayerUnit : Unit,IPointerClickHandler
         destinationSetter.TargetPositionSet(target);
     }
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         HandleAnimations();
-
+        if(GameManager.Instance.selectedUnits.Contains(this))
+        {
+            material.SetFloat("_IsOutlineEnabled", 1);
+        }
+        else 
+        {
+           material.SetFloat("_IsOutlineEnabled", 0);
+        }
         if (targetUnit != null)
         {
             if (unitState == UnitState.TAKING_OVER)

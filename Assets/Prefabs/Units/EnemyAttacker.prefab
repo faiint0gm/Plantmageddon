@@ -57,6 +57,7 @@ MonoBehaviour:
   moveSpeed: 30
   unitType: 5
   animator: {fileID: 5431966516356971039}
+  hpBar: {fileID: 736891356808914227}
   isChangingForm: 0
   safeDistance: 40
 --- !u!212 &8263845099321790563
@@ -366,3 +367,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3924282489034651746}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &736891356808914227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4344897120375184721, guid: feb754c69aaaf6b45a9ee4101ba73f30,
+    type: 3}
+  m_PrefabInstance: {fileID: 3924282489034651746}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c1aae274a831b43af6579f44475f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

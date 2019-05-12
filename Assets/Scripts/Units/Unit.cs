@@ -30,7 +30,8 @@ public class Unit : MonoBehaviour
     protected Vector3 target;
 
     protected AIDestinationSetter destinationSetter;
-    protected AIPath aiPath;
+    [HideInInspector]
+    public  AIPath aiPath;
     protected float endReachedDistance;
 
     public bool isChangingForm;
@@ -50,9 +51,10 @@ public class Unit : MonoBehaviour
         
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         InitHp();
+        hpBar.SetupHPBar(currentHp,hp);
         unitState = UnitState.IDLE;
     }
 
@@ -111,7 +113,7 @@ public class Unit : MonoBehaviour
             randomNumber = (int)attackerType;
         }
         Debug.Log("Change form! Called from: " + attackerType.ToString());
-        Instantiate(GameManager.Instance.unitsPrefabs[(UnitType)randomNumber], transform.position,
+        Instantiate(GameManager.Instance.unitsPrefabs[(UnitType)randomNumber], transform.position+new Vector3(0,0,0.1f),
                         Quaternion.identity, GameManager.Instance.unitsParent);
         Die();
     }
@@ -137,12 +139,12 @@ public class Unit : MonoBehaviour
     public IEnumerator TakeOver(Unit unit)
     {
         unit.InterruptPathFollowing();
-        unit.aiPath.canMove = false;
         while (unit.currentHp > 0)
         {
-            yield return new WaitForSeconds(damageTime);
-            GiveDamage(unit);
             unitState = UnitState.TAKING_OVER;
+            yield return new WaitForSeconds(damageTime);
+            unit.aiPath.canMove = false;
+            GiveDamage(unit);
             if (unitState != UnitState.TAKING_OVER)
             {
                 ResetCurrentHp(unit);
@@ -271,20 +273,15 @@ public class Unit : MonoBehaviour
 
     public void InterruptPathFollowing()
     {
-        StopAllCoroutines();
         target = transform.position;
         targetUnit = null;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (unitState == UnitState.IDLE && !aiPath.canMove)
         {
-            aiPath.canMove = true;
-        }
-        if (takingOverStarted)
-        {
-            InterruptPathFollowing();
+            //aiPath.canMove = true;
         }
     }
 
@@ -294,14 +291,14 @@ public class Unit : MonoBehaviour
         {
             case UnitState.IDLE:
                 {
-                    if (targetUnit == null || Vector3.Distance(transform.position, target) <= rangeToAttack)
+                    if (targetUnit == null && aiPath.reachedEndOfPath)
                     {
                         animator.SetBool("Idle", true);
                         animator.SetBool("isAttacking", false);
                         animator.SetBool("isBeingAttacked", false);
                         animator.SetBool("isWalking", false);
                     }
-                    if (targetUnit != null || Vector3.Distance(transform.position,target)>rangeToAttack)
+                    if (targetUnit != null || !aiPath.reachedEndOfPath )
                     {
                         animator.SetBool("Idle", false);
                         animator.SetBool("isAttacking", false);
@@ -312,19 +309,22 @@ public class Unit : MonoBehaviour
                 }
             case UnitState.TAKING_OVER:
                 {
-                    if (Vector3.Distance(transform.position, targetUnit.transform.position) < rangeToAttack)
+                    if (targetUnit != null)
                     {
-                        animator.SetBool("Idle", false);
-                        animator.SetBool("isAttacking", true);
-                        animator.SetBool("isBeingAttacked", false);
-                        animator.SetBool("isWalking", false);
-                    }
-                    else
-                    {
-                        animator.SetBool("Idle", false);
-                        animator.SetBool("isAttacking", false);
-                        animator.SetBool("isBeingAttacked", false);
-                        animator.SetBool("isWalking", true);
+                        if (Vector3.Distance(transform.position, targetUnit.transform.position) < rangeToAttack)
+                        {
+                            animator.SetBool("Idle", false);
+                            animator.SetBool("isAttacking", true);
+                            animator.SetBool("isBeingAttacked", false);
+                            animator.SetBool("isWalking", false);
+                        }
+                        else
+                        {
+                            animator.SetBool("Idle", false);
+                            animator.SetBool("isAttacking", false);
+                            animator.SetBool("isBeingAttacked", false);
+                            animator.SetBool("isWalking", true);
+                        }
                     }
                     break;
                 }

@@ -11,8 +11,11 @@ public class MovableGround : MonoBehaviour, IPointerClickHandler
         {
             if (player != null && !GameManager.Instance.lockMovement)
             {
-                player.InterruptPathFollowing();
-                player.MoveToSelectedTarget();
+                if (player.aiPath.canMove)
+                {
+                    player.InterruptPathFollowing();
+                    player.MoveToSelectedTarget();
+                }
             }
         }
     }
