@@ -86,6 +86,7 @@ public class Unit : MonoBehaviour
     public void ResetCurrentHp(Unit unit)
     {
         unit.currentHp = unit.hp;
+        unit.hpBar.SetFiller(unit.currentHp, unit.hp);
     }
 
     void InitHp()

@@ -13,22 +13,26 @@ public class HPBar : MonoBehaviour
     {
         CurrentHP = currentHP;
         MaxHP = maxHP;
+        CheckAndSetBar();
     }
 
     public void SetFiller(float currentHP, float maxHP)
     {
         CurrentHP = currentHP;
         MaxHP = maxHP;
-        fillerImage.fillAmount = currentHP / maxHP;
+        if(fillerImage!=null)
+            fillerImage.fillAmount = currentHP / maxHP;
+        CheckAndSetBar();
     }
 
-    private void Update()
+
+    void CheckAndSetBar()
     {
-        if (CurrentHP / MaxHP == 1 && gameObject.activeInHierarchy)
+        if (CurrentHP == MaxHP)
         {
             gameObject.SetActive(false);
         }
-        else
+        else if (CurrentHP != MaxHP)
         {
             gameObject.SetActive(true);
         }
