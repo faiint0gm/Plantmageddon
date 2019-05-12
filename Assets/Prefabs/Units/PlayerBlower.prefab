@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4704044012543977598}
   - component: {fileID: 4160314731919363459}
   - component: {fileID: 6111843068388625759}
+  - component: {fileID: 6285416330611074748}
   m_Layer: 0
   m_Name: PlayerBlower
   m_TagString: Untagged
@@ -54,6 +55,7 @@ MonoBehaviour:
   rangeToAttack: 40
   moveSpeed: 10
   unitType: 3
+  animator: {fileID: 6285416330611074748}
   isChangingForm: 0
 --- !u!212 &6075252322809373985
 SpriteRenderer:
@@ -208,3 +210,22 @@ MonoBehaviour:
   version: 1
   target: {fileID: 0}
   playerTarget: {x: 0, y: 0, z: 0}
+--- !u!95 &6285416330611074748
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314230689222507367}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e8216a999872c4c488989aa2bca86b48, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
