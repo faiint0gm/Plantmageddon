@@ -86,7 +86,10 @@ public class Unit : MonoBehaviour
     public void ResetCurrentHp(Unit unit)
     {
         unit.currentHp = unit.hp;
-        unit.hpBar.SetFiller(unit.currentHp, unit.hp);
+        if (unit.hpBar != null)
+        {
+            unit.hpBar.SetFiller(unit.currentHp, unit.hp);
+        }
     }
 
     void InitHp()
@@ -216,15 +219,10 @@ public class Unit : MonoBehaviour
 
     protected virtual void FollowAndTakeOver()
     {
-        if (takingOverStarted)
-        {
-            target = transform.position;
-        }
-        else
-        {
-            target = targetUnit.transform.position;
-            target = new Vector3(target.x, target.y, transform.position.z);
-        }
+
+        target = targetUnit.transform.position;
+        target = new Vector3(target.x, target.y, transform.position.z);
+
         destinationSetter.TargetPositionSet(target);
         if (Vector3.Distance(transform.position, target) <= rangeToAttack && !takingOverStarted)
         {
@@ -235,15 +233,9 @@ public class Unit : MonoBehaviour
 
     protected void FollowAndBlowOver()
     {
-        if(takingOverStarted)
-        {
-            target = transform.position;
-        }
-        else
-        {
-            target = targetUnit.transform.position;
-            target = new Vector3(target.x, target.y, transform.position.z);
-        }
+        target = targetUnit.transform.position;
+        target = new Vector3(target.x, target.y, transform.position.z);
+
         destinationSetter.TargetPositionSet(target);
         if (Vector3.Distance(transform.position, target) <= rangeToAttack && !takingOverStarted)
         {
