@@ -11,6 +11,10 @@ public class MainMenuController : MonoBehaviour
     GameObject creditsPanel;
     [SerializeField]
     GameObject mainMenuPanel;
+    [SerializeField]
+    GameObject winPanel;
+    [SerializeField]
+    GameObject losePanel;
 
     public void StartGame()
     {
@@ -40,5 +44,38 @@ public class MainMenuController : MonoBehaviour
         {
             Debug.LogError("No Credits Panel or Main Menu Panel set in inspector!");
         }
+    }
+
+    public void NextLevel()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            BackToMenu();
+            return;
+        }
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void BackToMenu()
+    {
+        if (SceneManager.GetSceneByBuildIndex(0) != null)
+        {
+            SceneManager.LoadSceneAsync(0);
+        }
+    }
+
+    public void ShowLosePanel()
+    {
+        losePanel.SetActive(true);
+    }
+
+    public void ShowWinPanel()
+    {
+        winPanel.SetActive(true);
     }
 }

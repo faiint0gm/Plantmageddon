@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCamera;
     CameraController cameraController;
-
+    MainMenuController menuController;
    
     public List<Unit> allUnits = new List<Unit>();
     
@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
         cameraController.lockXmax = camXMaxLock;
         cameraController.lockYmin = camYMinLock;
         cameraController.lockYmax = camYMaxLock;
+        menuController = FindObjectOfType<MainMenuController>();
     }
 
     void UpdateAmounts()
@@ -275,6 +276,18 @@ public class GameManager : MonoBehaviour
         if (levelTheme != null)
         {
             FindObjectOfType<AudioController>().themeMusic = levelTheme;
+        }
+    }
+
+    void GameplayControl()
+    {
+        if(playerUnits.Count <= 0)
+        {
+            menuController.ShowLosePanel();
+        }
+        if(enemyUnits.Count <= 0)
+        {
+            menuController.ShowWinPanel();
         }
     }
 }
