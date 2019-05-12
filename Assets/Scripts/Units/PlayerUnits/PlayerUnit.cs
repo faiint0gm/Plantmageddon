@@ -87,6 +87,11 @@ public class PlayerUnit : Unit,IPointerClickHandler
                 aiPath.endReachedDistance = endReachedDistance;
             }
         }
+
+        if(killingHp<=0)
+        {
+            Die();
+        }
     }
 
     public override void Die()

@@ -58,6 +58,7 @@ MonoBehaviour:
   unitType: 5
   animator: {fileID: 5431966516356971039}
   hpBar: {fileID: 736891356808914227}
+  aiPath: {fileID: 0}
   isChangingForm: 0
   safeDistance: 40
 --- !u!212 &8263845099321790563
@@ -97,12 +98,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 24f4e2fb4ddf4224b950ace075e9eee9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 427494c4f0e95f2408c597e57be878b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 10.24, y: 10.24}
+  m_DrawMode: 1
+  m_Size: {x: 20.24, y: 20.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -125,14 +126,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.67, y: 6.06}
-    newSize: {x: 10.24, y: 10.24}
+    oldSize: {x: 10.24, y: 10.24}
+    newSize: {x: 20.24, y: 20.24}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 20.24, y: 20.48}
   m_EdgeRadius: 0
 --- !u!114 &1927278915697173578
 MonoBehaviour:
@@ -302,12 +303,12 @@ PrefabInstance:
     - target: {fileID: 9183104363597580836, guid: feb754c69aaaf6b45a9ee4101ba73f30,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.52
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9183104363597580836, guid: feb754c69aaaf6b45a9ee4101ba73f30,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 3.68
+      value: 11.35
       objectReference: {fileID: 0}
     - target: {fileID: 9183104363597580836, guid: feb754c69aaaf6b45a9ee4101ba73f30,
         type: 3}

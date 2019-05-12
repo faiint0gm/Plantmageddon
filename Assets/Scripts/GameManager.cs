@@ -55,7 +55,17 @@ public class GameManager : MonoBehaviour
     public bool lockMovement;
     [SerializeField]
     Texture selectionTexture;
-    
+    [Header("Camera locks")]
+    [SerializeField]
+    float camXMinLock;
+    [SerializeField]
+    float camXMaxLock;
+    [SerializeField]
+    float camYMinLock;
+    [SerializeField]
+    float camYMaxLock;
+
+
     void Awake()
     {
         if (Instance == null)
@@ -104,6 +114,10 @@ public class GameManager : MonoBehaviour
             unitsPrefabs.Add(prefab.unitType, prefab.unitPrefab);
         }
         initialized = true;
+        cameraController.lockXmin = camXMinLock;
+        cameraController.lockXmax = camXMaxLock;
+        cameraController.lockYmin = camYMinLock;
+        cameraController.lockYmax = camYMaxLock;
     }
 
     void UpdateAmounts()
