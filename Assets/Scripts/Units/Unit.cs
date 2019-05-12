@@ -39,6 +39,16 @@ public class Unit : MonoBehaviour
     bool killingStarted;
     RaycastHit2D hit2d;
 
+    [Header("AUDIO")]
+    [SerializeField]
+    AudioClip footStepSound;
+    [SerializeField]
+    AudioClip attackSound;
+    [SerializeField]
+    AudioClip gettinHitSound;
+    [SerializeField]
+    AudioSource sfxSource;
+
     public UnitState UnitState
     {
         get { return unitState; }
@@ -53,6 +63,11 @@ public class Unit : MonoBehaviour
 
     protected virtual void Start()
     {
+        if(sfxSource == null)
+        {
+            gameObject.AddComponent<AudioSource>();
+            sfxSource.outputAudioMixerGroup = GameManager.Instance.sfxAudioGroup;
+        }
         InitHp();
         hpBar.SetupHPBar(currentHp,hp);
         unitState = UnitState.IDLE;
@@ -297,6 +312,7 @@ public class Unit : MonoBehaviour
                         animator.SetBool("isAttacking", false);
                         animator.SetBool("isBeingAttacked", false);
                         animator.SetBool("isWalking", true);
+                        PlayLoopedFX(footStepSound);
                     }
                     break;
                 }
@@ -310,6 +326,14 @@ public class Unit : MonoBehaviour
                             animator.SetBool("isAttacking", true);
                             animator.SetBool("isBeingAttacked", false);
                             animator.SetBool("isWalking", false);
+                            if(unitType!=UnitType.playerBlower)
+                            {
+                                PlayLoopedFX(attackSound);
+                            }
+                            else
+                            {
+                                PlaySingleFx(attackSound);
+                            }
                         }
                         else
                         {
@@ -317,6 +341,7 @@ public class Unit : MonoBehaviour
                             animator.SetBool("isAttacking", false);
                             animator.SetBool("isBeingAttacked", false);
                             animator.SetBool("isWalking", true);
+                            PlayLoopedFX(footStepSound);
                         }
                     }
                     break;
@@ -327,6 +352,7 @@ public class Unit : MonoBehaviour
                     animator.SetBool("isAttacking", false);
                     animator.SetBool("isBeingAttacked", true);
                     animator.SetBool("isWalking", false);
+                    PlayLoopedFX(gettinHitSound);
                     break;
                 }
             case UnitState.KILLING:
@@ -336,8 +362,36 @@ public class Unit : MonoBehaviour
                     animator.SetBool("isBeingAttacked", false);
                     animator.SetBool("isWalking", false);
                     animator.SetBool("isKilling", true);
+                    PlayLoopedFX(attackSound);
                     break;
                 }
+        }
+    }
+
+    void PlayLoopedFX(AudioClip clip)
+    {
+        if (sfxSource.clip != clip)
+        {
+            if (sfxSource.clip != null)
+            {
+                sfxSource.Stop();
+            }
+            sfxSource.loop = true;
+            sfxSource.clip = clip;
+            sfxSource.Play();
+        }
+    }
+
+    void PlaySingleFx(AudioClip clip)
+    {
+        if (sfxSource.clip != clip)
+        {
+            if (sfxSource.clip != null)
+            {
+                sfxSource.Stop();
+            }
+            sfxSource.loop = false;
+            sfxSource.PlayOneShot(clip);
         }
     }
 }

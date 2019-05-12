@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using UnityEngine.Audio;
 
 [System.Serializable]
 public struct UnitsPrefabs
@@ -65,6 +66,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     float camYMaxLock;
 
+    public AudioClip levelTheme;
+    public AudioMixerGroup sfxAudioGroup;
 
     void Awake()
     {
@@ -266,4 +269,12 @@ public class GameManager : MonoBehaviour
             }
 
         }
+
+    void SetTheme()
+    {
+        if (levelTheme != null)
+        {
+            FindObjectOfType<AudioController>().themeMusic = levelTheme;
+        }
+    }
 }

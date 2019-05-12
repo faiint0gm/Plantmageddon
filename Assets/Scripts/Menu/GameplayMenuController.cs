@@ -15,4 +15,9 @@ public class GameplayMenuController : MonoBehaviour
             SceneManager.LoadSceneAsync(mainMenuSceneIndex);
         }
     }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }
