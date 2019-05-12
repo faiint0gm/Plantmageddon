@@ -60,6 +60,10 @@ MonoBehaviour:
   hpBar: {fileID: 736891356808914227}
   aiPath: {fileID: 0}
   isChangingForm: 0
+  footStepSound: {fileID: 8300000, guid: f5e9243e73e395149a8d55edba9fcb1a, type: 3}
+  attackSound: {fileID: 8300000, guid: e8ce05c4f371a004eb076816aae75cc8, type: 3}
+  gettinHitSound: {fileID: 8300000, guid: 32bfd056244072145991265100d36dcf, type: 3}
+  sfxSource: {fileID: 0}
   safeDistance: 40
 --- !u!212 &8263845099321790563
 SpriteRenderer:
@@ -103,7 +107,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 20.24, y: 20.24}
+  m_Size: {x: 20.48, y: 20.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -127,13 +131,13 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 10.24, y: 10.24}
-    newSize: {x: 20.24, y: 20.24}
+    newSize: {x: 20.48, y: 20.48}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20.24, y: 20.48}
+  m_Size: {x: 20.48, y: 20.48}
   m_EdgeRadius: 0
 --- !u!114 &1927278915697173578
 MonoBehaviour:

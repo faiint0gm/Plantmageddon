@@ -60,6 +60,10 @@ MonoBehaviour:
   hpBar: {fileID: 7917269238794884376}
   aiPath: {fileID: 0}
   isChangingForm: 0
+  footStepSound: {fileID: 8300000, guid: 8a4b4f3202bee0243a82346afd35f66c, type: 3}
+  attackSound: {fileID: 8300000, guid: 5b550b2b778dbb14b8b118013456891b, type: 3}
+  gettinHitSound: {fileID: 0}
+  sfxSource: {fileID: 0}
 --- !u!212 &6075252322809373985
 SpriteRenderer:
   m_ObjectHideFlags: 0

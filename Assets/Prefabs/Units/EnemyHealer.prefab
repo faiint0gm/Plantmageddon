@@ -60,6 +60,10 @@ MonoBehaviour:
   hpBar: {fileID: 4954775367911420964}
   aiPath: {fileID: 0}
   isChangingForm: 0
+  footStepSound: {fileID: 8300000, guid: f5e9243e73e395149a8d55edba9fcb1a, type: 3}
+  attackSound: {fileID: 8300000, guid: 75fc5b244abda7b4da396eb8025749d0, type: 3}
+  gettinHitSound: {fileID: 8300000, guid: 32bfd056244072145991265100d36dcf, type: 3}
+  sfxSource: {fileID: 0}
   safeDistance: 30
 --- !u!212 &3132428933421925744
 SpriteRenderer:
@@ -224,7 +228,7 @@ Animator:
   m_GameObject: {fileID: 3042407064886869334}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 46dd1e9a5a7e5594184f2bf6bc7fd1c0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 47316eb56a5ad1c40b44ca1421623e5e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
