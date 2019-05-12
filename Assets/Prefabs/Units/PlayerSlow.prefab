@@ -54,7 +54,7 @@ MonoBehaviour:
   damage: 5
   damageTime: 1
   rangeToAttack: 5
-  moveSpeed: 10
+  moveSpeed: 20
   unitType: 1
   animator: {fileID: 7719069323630053958}
   hpBar: {fileID: 8250105106547442858}

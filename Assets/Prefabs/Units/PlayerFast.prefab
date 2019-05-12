@@ -54,7 +54,7 @@ MonoBehaviour:
   damage: 1
   damageTime: 0.25
   rangeToAttack: 5
-  moveSpeed: 20
+  moveSpeed: 40
   unitType: 0
   animator: {fileID: 5780352282005311768}
   hpBar: {fileID: 1541548674564167603}
@@ -121,7 +121,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.25676823, y: 0.22467232}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
