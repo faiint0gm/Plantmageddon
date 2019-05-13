@@ -10,10 +10,19 @@ public class AudioController : MonoBehaviour
     public AudioClip themeMusic;
     public bool playMusic;
     public AudioMixerGroup musicGroup;
+    AudioController[] other;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        other = FindObjectsOfType<AudioController>();
+        foreach(AudioController ac in other)
+        {
+            if(ac != this)
+            {
+                Destroy(ac.gameObject);
+            }
+        }
     }
     private void Start()
     {
@@ -21,12 +30,13 @@ public class AudioController : MonoBehaviour
         musicSource.loop = true;
         musicSource.outputAudioMixerGroup = musicGroup;
         musicSource.clip = themeMusic;
-        musicSource.Play();
-        
+        musicSource.Play(); 
     }
 
     public void SetupAudio()
     {
+        musicSource.Stop();
+        musicSource.clip = null;
         musicSource.loop = true;
         musicSource.clip = themeMusic;
         musicSource.Play();

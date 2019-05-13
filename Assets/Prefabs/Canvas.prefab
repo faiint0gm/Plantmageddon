@@ -1332,6 +1332,7 @@ MonoBehaviour:
   mainMenuPanel: {fileID: 1852746161}
   winPanel: {fileID: 1756047876}
   losePanel: {fileID: 708354772}
+  menuTheme: {fileID: 8300000, guid: ac20e48fbbf497b43b7649d18c39c3dc, type: 3}
 --- !u!1 &600292960
 GameObject:
   m_ObjectHideFlags: 0
@@ -3358,7 +3359,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Credit
+  m_Text: Credits
 --- !u!1 &1607616174
 GameObject:
   m_ObjectHideFlags: 0

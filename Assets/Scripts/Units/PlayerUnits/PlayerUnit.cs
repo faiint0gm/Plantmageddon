@@ -48,6 +48,13 @@ public class PlayerUnit : Unit,IPointerClickHandler
         destinationSetter.TargetPositionSet(target);
     }
 
+    public void MoveToTarget(Vector3 thisTarget)
+    {
+        target = thisTarget;
+        target = new Vector3(target.x, target.y, transform.position.z);
+        destinationSetter.TargetPositionSet(target);
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -82,6 +89,7 @@ public class PlayerUnit : Unit,IPointerClickHandler
                 unitState = UnitState.IDLE;
                 aiPath.canMove = true;
             }
+
             if (aiPath != null)
             {
                 aiPath.endReachedDistance = endReachedDistance;

@@ -15,6 +15,8 @@ public class MainMenuController : MonoBehaviour
     GameObject winPanel;
     [SerializeField]
     GameObject losePanel;
+    [SerializeField]
+    AudioClip menuTheme;
 
     public void StartGame()
     {
@@ -66,6 +68,8 @@ public class MainMenuController : MonoBehaviour
         if (SceneManager.GetSceneByBuildIndex(0) != null)
         {
             SceneManager.LoadSceneAsync(0);
+            FindObjectOfType<AudioController>().themeMusic = menuTheme;
+            FindObjectOfType<AudioController>().SetupAudio();
         }
     }
 

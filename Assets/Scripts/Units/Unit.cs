@@ -305,6 +305,10 @@ public class Unit : MonoBehaviour
                         animator.SetBool("isAttacking", false);
                         animator.SetBool("isBeingAttacked", false);
                         animator.SetBool("isWalking", false);
+                        if(unitType == UnitType.enemyAttacker)
+                        {
+                            animator.SetBool("isKilling", false);
+                        }
                         sfxSource.Stop();
                     }
                     if (targetUnit != null || !aiPath.reachedEndOfPath )
@@ -313,6 +317,10 @@ public class Unit : MonoBehaviour
                         animator.SetBool("isAttacking", false);
                         animator.SetBool("isBeingAttacked", false);
                         animator.SetBool("isWalking", true);
+                        if (unitType == UnitType.enemyAttacker)
+                        {
+                            animator.SetBool("isKilling", false);
+                        }
                         PlayLoopedFX(footStepSound);
                     }
                     break;
@@ -353,6 +361,10 @@ public class Unit : MonoBehaviour
                     animator.SetBool("isAttacking", false);
                     animator.SetBool("isBeingAttacked", true);
                     animator.SetBool("isWalking", false);
+                    if (unitType == UnitType.enemyAttacker)
+                    {
+                        animator.SetBool("isKilling", false);
+                    }
                     PlayLoopedFX(gettinHitSound);
                     break;
                 }

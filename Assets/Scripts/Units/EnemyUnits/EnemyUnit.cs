@@ -113,7 +113,7 @@ public class EnemyUnit : Unit,IPointerClickHandler
     protected override void Update()
     {
         //base.Update();
-
+        HandleAnimations();
         FindAndSetClosestTarget();
 
         if (targetUnit != null)
