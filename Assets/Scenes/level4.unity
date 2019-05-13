@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -32519,6 +32519,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1250985614}
+    - target: {fileID: 8542712700606746838, guid: 337cfa994c067ee439b216d1f3e2f562,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542712700757036650, guid: 337cfa994c067ee439b216d1f3e2f562,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8542712700757036648, guid: 337cfa994c067ee439b216d1f3e2f562,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -32527,6 +32537,26 @@ PrefabInstance:
     - target: {fileID: 8542712700757036648, guid: 337cfa994c067ee439b216d1f3e2f562,
         type: 3}
       propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542712701805424707, guid: 337cfa994c067ee439b216d1f3e2f562,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542712701805424707, guid: 337cfa994c067ee439b216d1f3e2f562,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542712701805424707, guid: 337cfa994c067ee439b216d1f3e2f562,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542712701423205990, guid: 337cfa994c067ee439b216d1f3e2f562,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8542712701423205988, guid: 337cfa994c067ee439b216d1f3e2f562,
@@ -32549,15 +32579,24 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 8542712701805424707, guid: 337cfa994c067ee439b216d1f3e2f562,
+    - target: {fileID: 8542712700354258955, guid: 337cfa994c067ee439b216d1f3e2f562,
         type: 3}
-      propertyPath: m_Material
-      value: 
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8542712701805424707, guid: 337cfa994c067ee439b216d1f3e2f562,
+    - target: {fileID: 8542712700741939463, guid: 337cfa994c067ee439b216d1f3e2f562,
         type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542712701799228731, guid: 337cfa994c067ee439b216d1f3e2f562,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852746161, guid: 337cfa994c067ee439b216d1f3e2f562, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 337cfa994c067ee439b216d1f3e2f562, type: 3}
@@ -37445,6 +37484,11 @@ PrefabInstance:
       propertyPath: camYMinLock
       value: -1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 8140920129053521488, guid: 32e35a0ba4a737b438628d4cc838060b,
+        type: 3}
+      propertyPath: levelTheme
+      value: 
+      objectReference: {fileID: 8300000, guid: ac20e48fbbf497b43b7649d18c39c3dc, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32e35a0ba4a737b438628d4cc838060b, type: 3}
 --- !u!1001 &8426673881946758204

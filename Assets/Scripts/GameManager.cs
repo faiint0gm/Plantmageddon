@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
         UpdateAmounts();
         HandleMultipleUnitSelection();
         HandleLists();
+        GameplayControl();
     }
     private void HandleLists()
     {
@@ -111,6 +112,7 @@ public class GameManager : MonoBehaviour
     }
     private void Init()
     {
+        SetTheme();
         cameraController = mainCamera.GetComponent<CameraController>();
         foreach (UnitsPrefabs prefab in unitPrefabs)
         {
@@ -276,6 +278,7 @@ public class GameManager : MonoBehaviour
         if (levelTheme != null)
         {
             FindObjectOfType<AudioController>().themeMusic = levelTheme;
+            FindObjectOfType<AudioController>().SetupAudio();
         }
     }
 

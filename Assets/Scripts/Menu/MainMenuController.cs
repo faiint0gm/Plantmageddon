@@ -18,9 +18,9 @@ public class MainMenuController : MonoBehaviour
 
     public void StartGame()
     {
-        if (SceneManager.GetSceneByBuildIndex(gameplaySceneIndex) != null)
+        if (SceneManager.GetSceneByBuildIndex(1) != null)
         {
-            SceneManager.LoadSceneAsync(gameplaySceneIndex);
+            SceneManager.LoadSceneAsync(1);
         }
         else
         {
@@ -77,5 +77,10 @@ public class MainMenuController : MonoBehaviour
     public void ShowWinPanel()
     {
         winPanel.SetActive(true);
+    }
+
+    public void GoToLastLevel()
+    {
+        SceneManager.LoadSceneAsync(4);
     }
 }
